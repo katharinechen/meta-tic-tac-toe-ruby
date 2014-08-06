@@ -1,7 +1,9 @@
 require './lib/space'
 require './lib/board'
 require './lib/player'
+require './lib/meta_board'
 require './lib/game'
+require 'pry'
 
 def static_board_holder
   @static_board = "
@@ -62,7 +64,8 @@ def main_menu
   main_choice = gets.chomp
 
   if main_choice == "n"
-    @new_meta_board = MetaBoard.new
+
+    @new_game = Game.new
     @active_board = @static_board
     puts "You have started a new game of ultimate meta-tic-tac-toe! You are player X!"
     static_board_holder
@@ -77,7 +80,7 @@ def main_menu
 end
 
 def game_play
-  if @new_meta_board.win_meta_game?
+  if @new_game.meta_board.win_meta_game?
     system 'clear'
     header
     puts @active_board
@@ -94,35 +97,18 @@ def turn
   header
   puts @active_board
   puts "Player #{@new_game.current_player.symbol}: select a box by typing in the number of the box."
-  number = gets.chomp.to_f
+  number = gets.chomp
 
   if @static_board.include?(number)
-    # number = number.to_s
-    #desire is to set mark for 1.2 in board
-    #it should sub for the spot
+    @new_game.meta_board.mark_space(number, @new_game.current_player.symbol)
+    @active_board.gsub!(number, " " + @new_game.current_player.symbol+ " ")
+    @new_game.take_turn
+    game_play
   else
     puts "Invalid selection."
     sleep 0.5
     game_play
   end
-
-  # if (1..9).include?(number)
-  #   if (@new_game.board[0].spaces[number - 1].marked_by == nil)
-  #     @new_game.board[0].spaces[number - 1].set_mark(@new_game.current_player.symbol)
-  #     @active_board.gsub!(number.to_s, @new_game.current_player.symbol)
-  #     @new_game.take_turn
-  #     game_play
-  #   else
-  #     puts "Invalid selection. Please try again."
-  #     sleep 0.5
-  #     game_play
-  #   end
-  # else
-  #   puts "Invalid selection. Please try again."
-  #     sleep 0.5
-  #     game_play
-  #   end
-
 end
 
 main_menu

@@ -1,12 +1,12 @@
 class Game
 
-  attr_reader :players, :board, :turn, :current_player
+  attr_reader :players, :meta_board, :turn, :current_player
 
   def initialize
     @playerX = Player.new("X")
     @playerO = Player.new("O")
     @players = [@playerX, @playerO]
-    @board = [Board.new(1)]
+    @meta_board = MetaBoard.new 
     @turn = 0
     @current_player = @players[0]
   end
@@ -19,4 +19,6 @@ class Game
 
 end
 
+
+#maybe we don't need the @turn
 

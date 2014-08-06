@@ -94,22 +94,25 @@ describe :MetaBoard do
   end
 end
 
-# describe :Game do
+describe :Game do
 
-#   describe :initialize do
-#     it 'initializes a game object' do
-#       new_game = Game.new
-#       expect(new_game).to be_an_instance_of Game
-#       expect(new_game.players.length).to eq(2)
-#       expect(new_game.board.length).to eq (1)
-#     end
-#   end
+  describe :initialize do
+    it 'initializes a game object' do
+      new_game = Game.new
+      expect(new_game).to be_an_instance_of Game
+      expect(new_game.players[0]).to be_an_instance_of Player
+      expect(new_game.players[1]).to be_an_instance_of Player 
+      expect(new_game.players.length).to eq(2)
+      expect(new_game.meta_board).to be_an_instance_of MetaBoard
+      expect(new_game.current_player.symbol).to eq("X")
+    end
+  end
 
-#   describe :take_turn do
-#     it 'should have turns' do
-#       new_game = Game.new
-#       expect(new_game.take_turn).to eq(1)
-#       expect(new_game.current_player.symbol).to eq("O")
-#     end
-#   end
-# end
+  describe :take_turn do
+    it 'should have turns' do
+      new_game = Game.new
+      expect(new_game.take_turn).to eq(1)
+      expect(new_game.current_player.symbol).to eq("O")
+    end
+  end
+end
