@@ -62,9 +62,9 @@ def main_menu
   main_choice = gets.chomp
 
   if main_choice == "n"
-    @new_game = Game.new
+    @new_meta_board = MetaBoard.new
     @active_board = @static_board
-    puts "You have started a new game! You are player X!"
+    puts "You have started a new game of ultimate meta-tic-tac-toe! You are player X!"
     static_board_holder
     game_play
   elsif main_choice == "e"
@@ -77,43 +77,52 @@ def main_menu
 end
 
 def game_play
-  if @new_game.board[0].win?
+  if @new_meta_board.win_meta_game?
     system 'clear'
     header
     puts @active_board
     puts "You Won!"
-  elsif @new_game.turn >= 9
-    puts "It's a TIE! Do you even lift?"
+  elsif @static_board.scan(/[1-9]/) == []
+    puts "It's a TIE! You should play again!"
+    main_menu
   else
     turn
   end
 end
 
 def turn
-  system 'clear'
   header
   puts @active_board
-  puts "Player #{@new_game.current_player.symbol}: select a box by typing in the number"
-  number = gets.chomp.to_i
-  if (1..9).include?(number)
-    if (@new_game.board[0].spaces[number - 1].marked_by == nil)
-      @new_game.board[0].spaces[number - 1].set_mark(@new_game.current_player.symbol)
-      @active_board.gsub!(number.to_s, @new_game.current_player.symbol)
-      @new_game.take_turn
-      game_play
-    else
-      puts "Invalid selection. Please try again."
-      sleep 0.5
-      game_play
-    end
+  puts "Player #{@new_game.current_player.symbol}: select a box by typing in the number of the box."
+  number = gets.chomp.to_f
+
+  if @static_board.include?(number)
+    # number = number.to_s
+    #desire is to set mark for 1.2 in board
+    #it should sub for the spot
   else
-    puts "Invalid selection. Please try again."
-      sleep 0.5
-      game_play
-    end
+    puts "Invalid selection."
+    sleep 0.5
+    game_play
+  end
+
+  # if (1..9).include?(number)
+  #   if (@new_game.board[0].spaces[number - 1].marked_by == nil)
+  #     @new_game.board[0].spaces[number - 1].set_mark(@new_game.current_player.symbol)
+  #     @active_board.gsub!(number.to_s, @new_game.current_player.symbol)
+  #     @new_game.take_turn
+  #     game_play
+  #   else
+  #     puts "Invalid selection. Please try again."
+  #     sleep 0.5
+  #     game_play
+  #   end
+  # else
+  #   puts "Invalid selection. Please try again."
+  #     sleep 0.5
+  #     game_play
+  #   end
+
 end
 
-
-
-
-  main_menu
+main_menu
