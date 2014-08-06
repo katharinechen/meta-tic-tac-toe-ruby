@@ -1,14 +1,13 @@
 class Board
 
-  attr_reader :game_number, :spaces, :win_game, :winning_symbol
+  attr_reader :board_number, :win_game, :winning_symbol, :spaces 
 
-  def initialize(count)
-    @count = count
+  def initialize(board_number)
+    @board_number = board_number
     @win_game = false
     @winning_symbol = nil
 
     @spaces = []
-
     1.upto(9) do |number|
       @spaces << Space.new(number.to_s)
     end
@@ -36,10 +35,7 @@ class Board
     @win_game
   end
 
-  #this method was made for testing
-  def set_winner(symbol)
+  def set_winner_for_meta_board(symbol)
     @winning_symbol = symbol
   end
-
-
 end
