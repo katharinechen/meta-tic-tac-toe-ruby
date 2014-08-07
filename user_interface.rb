@@ -67,6 +67,7 @@ def main_menu
 
     @new_game = Game.new
     @active_board = @static_board
+    @previous_number = nil 
     puts "You have started a new game of ultimate meta-tic-tac-toe! You are player X!"
     static_board_holder
     game_play
@@ -97,16 +98,25 @@ def turn
   header
   puts @active_board
   puts "Player #{@new_game.current_player.symbol}: select a box by typing in the number of the box."
-  number = gets.chomp
+  puts "The last turn taken was #{@previous_number}."
+  number = gets.chomp 
 
   if @static_board.include?(number)
-    @new_game.meta_board.mark_space(number, @new_game.current_player.symbol)
-    @active_board.gsub!(number, " " + @new_game.current_player.symbol+ " ")
-    @new_game.take_turn
-    game_play
+    if @new_game.turn == 0 || (number[0].to_i == @previous_number[-1].to_i)
+      @new_game.meta_board.mark_space(number, @new_game.current_player.symbol)
+      @active_board.gsub!(number, " " + @new_game.current_player.symbol+ " ")
+      @new_game.take_turn
+      @previous_number = number 
+      game_play
+    else
+      puts "Invalid Entry. Remember, because the previous player selected #{@previous_number}."
+      puts "You can only select space that available in board number #{@previous_number[-1]}." 
+      sleep 2.5
+      game_play
+    end 
   else
     puts "Invalid selection."
-    sleep 0.5
+    sleep 1.0
     game_play
   end
 end

@@ -82,6 +82,24 @@ describe :MetaBoard do
     end 
   end 
 
+  describe :mark_space do 
+    it 'marks appropriate space on the board' do
+      new_meta = MetaBoard.new 
+      new_meta.mark_space("1.1", "X")
+      expect(new_meta.boards[0].spaces[0].marked_by).to eq("X")
+    end
+
+    it 'marks a board as win if there is a tic-tac-toe on a board' do 
+      new_meta = MetaBoard.new 
+      new_meta.mark_space("1.1", "X")
+      new_meta.mark_space("1.2", "X")
+      new_meta.mark_space("1.3", "X")
+      expect(new_meta.win_meta_game?).to eq(false)
+      expect(new_meta.boards[0].win_game).to eq(true)
+      expect(new_meta.boards[0].winning_symbol).to eq("X")
+    end 
+  end
+
   describe :win_meta_game? do
     it "should set win_meta_game to true" do
       new_meta = MetaBoard.new

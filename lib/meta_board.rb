@@ -22,6 +22,10 @@ class MetaBoard
 
   def win_meta_game?
 
+    @boards.each do |board|
+      board.win? 
+    end 
+
     winning_board_sets = [[@boards[0],@boards[1],@boards[2]],
                           [@boards[3],@boards[4],@boards[5]],
                           [@boards[6],@boards[7],@boards[8]],
