@@ -4,8 +4,6 @@ require 'space'
 require 'board'
 require 'meta_board'
 require 'game'
-require 'pry'
-
 
 describe :Space do
 
