@@ -22,15 +22,15 @@ Meta Tic-Tac-Toe requires 2 players, "X" and "O". The objective of the game is t
 
 First, clone this repository in your terminal. 
 
-	```git clone https://github.com/katharinechen/meta-tic-tac-toe-ruby.git ``` 
+	git clone https://github.com/katharinechen/meta-tic-tac-toe-ruby.git 
 
 Open the user_interface.rb file after installing Ruby. 
 
-	```ruby user_interface.rb```
+	ruby user_interface.rb
 
 If you have not installed colorize, install the colorize gem. 
 
-	```gem install colorize```
+	gem install colorize
 
 --- 
 
