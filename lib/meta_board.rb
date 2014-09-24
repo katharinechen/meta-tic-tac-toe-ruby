@@ -1,11 +1,10 @@
 class MetaBoard
 
-  attr_reader :win_meta, :meta_winner, :boards  
+  attr_reader :win_meta, :meta_winner, :boards
 
   def initialize
     @win_meta = false
     @meta_winner = nil
-
     @boards = []
     1.upto(9) do |number|
       @boards << Board.new(number)
@@ -13,18 +12,16 @@ class MetaBoard
   end
 
   def mark_space(chosen_space, symbol)
-
     board_number = chosen_space[0].to_i
-    space_number = chosen_space[-1].to_i 
-    @boards[board_number-1].spaces[space_number-1].set_mark(symbol) 
-  end 
+    space_number = chosen_space[-1].to_i
+    @boards[board_number-1].spaces[space_number-1].set_mark(symbol)
+  end
 
 
   def win_meta_game?
-
     @boards.each do |board|
-      board.win? 
-    end 
+      board.win?
+    end
 
     winning_board_sets = [[@boards[0],@boards[1],@boards[2]],
                           [@boards[3],@boards[4],@boards[5]],
@@ -46,6 +43,4 @@ class MetaBoard
     end
     @win_meta
   end
-
 end
-

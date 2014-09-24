@@ -6,7 +6,7 @@ class Game
     @playerX = Player.new("X")
     @playerO = Player.new("O")
     @players = [@playerX, @playerO]
-    @meta_board = MetaBoard.new 
+    @meta_board = MetaBoard.new
     @turn = 0
     @current_player = @players[0]
   end
