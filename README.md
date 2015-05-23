@@ -6,6 +6,8 @@ This project is written by [Katharine Chen](http://www.katharinechen.com) for th
 
 The project is a recreation of the extension of a popular game called Tic-Tac-Toe.
 
+![](photo/example.png?raw=true)
+
 ## How To Play
 
 Imagine a game of tic-tac-toe where each individual spaces of the board is another tic-tac-toe game. That is meta-tic-tac-toe.
